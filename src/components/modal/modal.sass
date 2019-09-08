@@ -1,0 +1,74 @@
+@import "../variables"
+
+.modal
+  position: fixed
+  top: 0
+  bottom: 0
+  right: 0
+  padding: 0 20px
+  background: rgba(25,36,64,.8)
+  text-align: center
+  overflow-y: scroll
+  overflow-x: hidden
+  transition: opacity .15s linear
+  white-space: nowrap
+  display: none
+  font-size: 0
+  left: 0
+  z-index: 11
+  opacity: 0
+  -webkit-overflow-scrolling: touch
+  -ms-touch-action: cross-slide-y pinch-zoom double-tap-zoom
+  touch-action: cross-slide-y pinch-zoom double-tap-zoom
+  -webkit-transform: translateZ(0)
+  transform: translateZ(0)
+  &--active
+    opacity: 1
+    display: block
+    .modal__dialog
+      transform: translateY(0)
+  &::before
+    content: ''
+    display: inline-block
+    height: 100%
+    vertical-align: middle
+  &__dialog
+    width: 100%
+    position: relative
+    z-index: 4
+    max-width: 485px
+    min-height: 110px
+    padding: 30px
+    margin-left: auto
+    margin-right: auto
+    display: inline-flex
+    flex-direction: column
+    vertical-align: middle
+    background: #fff
+    transform: translateY(-100px)
+    transition: opacity .3s linear,transform .3s ease-out,-webkit-transform .3s ease-out,-moz-transform .3s ease-out,-o-transform .3s ease-out
+  &__buttons
+    margin-top: auto
+  &__btn
+    &:not(:last-child)
+      margin-right: 15px
+  &__close
+    display: block
+    position: absolute
+    cursor: pointer
+    width: 30px
+    height: 30px
+    right: -45px
+    top: 3px
+    z-index: 10
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS42NDIgMTUuNjQyIj48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04Ljg4MiA3LjgyMWw2LjU0MS02LjU0MUEuNzUuNzUgMCAxIDAgMTQuMzYyLjIxOUw3LjgyMSA2Ljc2IDEuMjguMjJBLjc1Ljc1IDAgMSAwIC4yMTkgMS4yODFMNi43NiA3LjgyMmwtNi41NCA2LjU0YS43NS43NSAwIDAgMCAxLjA2IDEuMDYxbDYuNTQxLTYuNTQxIDYuNTQxIDYuNTQxYS43NS43NSAwIDEgMCAxLjA2LTEuMDYxbC02LjU0LTYuNTQxeiIvPjwvc3ZnPg==)
+    background-repeat: no-repeat
+    -webkit-background-size: 100%
+    background-size: 100%
+    background-position: 50% 50%
+  &__title
+    color: $textColor
+    font-size: 20px
+    text-align: center
+    margin-bottom: 30px
+    display: block

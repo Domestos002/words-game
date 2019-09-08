@@ -1,0 +1,36 @@
+@import "../variables"
+@import "../mixins"
+
+.btn
+  display: inline-flex
+  border: 1px solid #828282
+  min-height: 30px
+  min-width: 30px
+  border-radius: 4px
+  cursor: pointer
+  font-size: $font-size-medium
+  padding: 0 15px
+  outline: none
+  +trans()
+  &--primary
+    border-color: $colorBrand
+    background-color: $colorBrand
+    color: #fff
+    &:hover
+      border-color: darken($colorBrand, 4%)
+      background-color: darken($colorBrand, 4%)
+  &--icon-only
+    padding: 0
+    justify-content: center
+    align-items: center
+  &--outline
+    border-color: #828282
+    &:hover
+      border-color: rgba(255,255,255,0.87)
+    &.btn--active
+      color: $colorBrand
+      border-color: $colorBrand
+  &__icon.svg-icon
+    width: 20px
+    height: 20px
+    color: rgba(255,255,255,0.87)

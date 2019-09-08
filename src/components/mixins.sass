@@ -1,0 +1,152 @@
+@mixin respond-to($media)
+  @if $media == sm
+    @media only screen and (max-width: $b-small)
+      //479
+           @content
+
+  @else if $media == md
+    @media only screen and (max-width: $b-medium)
+      //767
+           @content
+
+  @else if $media == lg
+    @media only screen and (max-width: $b-large)
+      //959
+           @content
+
+  @else if $media == dk
+    @media only screen and (max-width: $b-desktop)
+      //1023
+           @content
+
+  @else if $media == xlg
+    @media only screen and (max-width: $b-xlarge)
+      //1219
+           @content
+
+  @else if $media == xxlg
+    @media only screen and (max-width: $b-xxlarge)
+      //1330
+           @content
+
+@mixin min-respond-to($media)
+  @if $media == sm
+    @media only screen and (min-width: $small)
+      @content
+
+  @else if $media == md
+    @media only screen and (min-width: $medium)
+      @content
+
+  @else if $media == lg
+    @media only screen and (min-width: $large)
+      @content
+
+  @else if $media == dk
+    @media only screen and (min-width: $desktop)
+      @content
+
+  @else if $media == xlg
+    @media only screen and (min-width: $xlarge)
+      @content
+
+@mixin range-respond-to($media)
+  @if $media == sm
+    @media only screen and (max-width: $b-small)
+      @content
+
+  @else if $media == md
+    @media only screen and (min-width: $small) and (max-width: $b-medium)
+      @content
+
+  @else if $media == lg
+    @media only screen and (min-width: $medium) and (max-width: $b-large)
+      @content
+
+  @else if $media == xlg
+    @media only screen and (min-width: $large) and (max-width: $xlarge)
+      @content
+
+  @else if $media == exlg
+    @media only screen and (min-width: $xlarge)
+      @content
+
+=trans($val: null)
+  @if ($val)
+    transition: $val 0.2s ease 0s
+  @else
+    transition: all 0.2s ease 0s
+
+=phc($color)
+  &::-webkit-input-placeholder
+    color: $color !important
+    opacity: 1 !important
+  &::-moz-placeholder
+    color: $color !important
+    opacity: 1 !important
+  &:-moz-placeholder
+    color: $color !important
+    opacity: 1 !important
+  &:-ms-input-placeholder
+    color: $color !important
+    opacity: 1 !important
+
+=fluid-columns($columns, $spaces, $mb)
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  margin-right: calc(#{$spaces} / 2 * (-1))
+  margin-left: calc(#{$spaces} / 2 * (-1))
+  position: relative
+  margin-top: -$mb
+  justify-content: center
+  & > div
+    box-sizing: border-box
+    padding-top: $mb
+    width: calc(1 / #{$columns} * 100%)
+    padding-left: calc(#{$spaces} / 2)
+    padding-right: calc(#{$spaces} / 2)
+
+=webkit-scroll($color: #e6e6e6, $width: 15px)
+  resize: none
+
+  &::-webkit-scrollbar
+    background-color: #383839
+    color: #cdccca
+    width: $width
+
+  ::-webkit-scrollbar-corner
+    background-color: #262627
+
+
+  &::-webkit-scrollbar-track
+    background-color: transparent
+    border-radius: 5px
+
+  &::-webkit-scrollbar-thumb
+    background-color: #2a2a2b
+
+=chevron($size, $border-size, $direction, $color)
+  z-index: 1
+  content: ''
+  display: inline-block
+  width: $size
+  height: $size
+  background: transparent
+  transform: rotate(45deg)
+  @if $direction == t
+    border: transparent
+    border-top: $border-size solid $color
+    border-left: $border-size solid $color
+  @else if $direction == r
+    border: transparent
+    border-top: $border-size solid $color
+    border-right: $border-size solid $color
+  @else if $direction == b
+    border: transparent
+    border-bottom: $border-size solid $color
+    border-right: $border-size solid $color
+  @else if $direction == l
+    border: transparent
+    border-bottom: $border-size solid $color
+    border-left: $border-size solid $color

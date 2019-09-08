@@ -1,0 +1,103 @@
+@import "./../variables"
+
+.masonry
+  position: fixed
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  &__inner
+    @extend %container
+    position: relative
+  &__title
+    font-size: 27px
+    display: block
+    margin-bottom: 30px
+    text-align: center
+  &__list
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    margin-top: -20px
+    margin-left: -20px
+    position: relative
+  &__item
+    width: 75px
+    height: 75px
+    box-sizing: border-box
+    background: #fff
+    border-radius: 3px
+    color: #616161
+    display: flex
+    align-items: center
+    justify-content: center
+    user-select: none
+    font-size: 35px
+    padding: 10px 0
+    overflow: hidden
+    text-align: center
+    box-shadow: 0 1px 1px 0 rgba(60,64,67,.08), 0 1px 3px 1px rgba(60,64,67,.16)
+    vertical-align: top
+    z-index: 1
+    margin-left: 20px
+    margin-top: 20px
+
+
+.nestable
+  position: relative
+  [draggable="true"]
+    cursor: move
+  &-list
+    display: block
+  &-item
+    display: inline-block
+  .nestable-list
+    margin: 0
+    padding: 0 0 0 40px
+    list-style-type: none
+  & > .nestable-list
+    padding: 0
+  &-item, &-item-copy
+    margin: 10px 0 0
+  &-item, &-item-copy
+    &:first-child
+      margin-top: 0
+    .nestable-list
+      margin-top: 10px
+  &-item
+    position: relative
+    &.is-dragging
+      .nestable-list
+        pointer-events: none
+      *
+        opacity: 0
+        filter: alpha(opacity=0)
+      &::before
+        content: ' '
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: rgba(106, 127, 233, 0.274)
+        border: 1px dashed rgb(73, 100, 241)
+        -webkit-border-radius: 5px
+        border-radius: 5px
+  &-drag-layer
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 100
+    pointer-events: none
+    & > .nestable-list
+      position: absolute
+      top: 0
+      left: 0
+      padding: 0
+      background-color: rgba(106, 127, 233, 0.274)
+
+
+

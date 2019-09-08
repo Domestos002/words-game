@@ -1,0 +1,28 @@
+@import "./../variables"
+@import "./../mixins"
+
+.result
+  &__inner
+    @extend %container
+  &__table
+    width: 100%
+    th
+      text-align: left
+    td
+      padding: 15px 0
+    tr
+      user-select: none
+      &:not(:last-child)
+        border-bottom: 1px solid #000
+  &__link
+    width: 100%
+    display: block
+    padding: 15px 0
+    cursor: pointer
+  &__btn
+    margin-top: 20px
+  &__title
+    font-size: 27px
+    display: block
+    margin-bottom: 30px
+    text-align: center

@@ -1,0 +1,34 @@
+@import "~reset-css/sass/reset"
+@import "../components/btn/btn"
+
+@import "./variables"
+@import "./mixins"
+
+body
+  color: $textColor
+  font-weight: 400
+  font-size: 16px
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
+
+
+.site-wrapper
+  padding: 50px 0 50px 0
+
+.preloader
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: #fff
+  &__img
+    width: 115px
+    height: 115px
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    background-image: url(http://i.giphy.com/3og0ISeflb7vrNzy2A.gif)
+    background-repeat: no-repeat
+    background-position: center
+    background-size: cover
