@@ -24,12 +24,12 @@ export default ({
 
   mounted() {
     this.$dragging.$on('dragend', () => {
-      if (this.word === this.dragResult) this.$emit('isRight');
+      if (this.word === this.dragResult) this.$emit('isRight'); // если слово совпадает с исходным - отсылает успешное событие
     });
   },
 
   computed: {
-    dragResult() {
+    dragResult() { // расчёт результата перетаскивания
       let words =  this.shuffledLetters.map(word => {
         return join(word.data.map(el => el.letter), '')
       });
@@ -39,18 +39,12 @@ export default ({
 
   watch: {
     word(word) {
-      const words = word.split(' ');
-      this.shuffledLetters = words.map((word, index) => {
-        return {
-          data: this.getLetters(word).map((el, index) => ({ letter: el, id: index })),
-          id: index
-        }
-      });
+      this.shuffledLetters = this.shuffleWord(word) // разбивает словосочетание на слова и пермешивает буквы
     },
   },
 
   methods: {
-    getLetters(word) {
+    getLetters: function(word) {
       const array = split(word, '');
       const shuffle = (arr) => {
         let j;
@@ -65,5 +59,14 @@ export default ({
       };
       return shuffle(array);
     },
+    shuffleWord: function(word) {
+      const words = word.split(' ');
+      return words.map((word, index) => {
+        return {
+          data: this.getLetters(word).map((el, index) => ({ letter: el, id: index })),
+          id: index
+        }
+      });
+    }
   },
 });
