@@ -8,6 +8,10 @@ export default ({
       type: String,
       default: '',
     },
+    visible: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
@@ -26,14 +30,22 @@ export default ({
 
   computed: {
     dragResult() {
-      return join(this.shuffledLetters.map(el => el.letter), '');
+      let words =  this.shuffledLetters.map(word => {
+        return join(word.data.map(el => el.letter), '')
+      });
+      return join(words, ' ')
     },
   },
 
   watch: {
     word(word) {
-      const shuffled = this.getLetters(word);
-      this.shuffledLetters = shuffled.map((el, index) => ({ letter: el, id: index }));
+      const words = word.split(' ');
+      this.shuffledLetters = words.map((word, index) => {
+        return {
+          data: this.getLetters(word).map((el, index) => ({ letter: el, id: index })),
+          id: index
+        }
+      });
     },
   },
 

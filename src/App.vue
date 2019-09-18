@@ -2,10 +2,13 @@
   #app.site-wrapper
     masonry(
         :word="word"
-        v-if="!endFlag"
+        :visible="!endFlag"
         @isRight="isRight")
-    result(v-if="endFlag" @back="back")
+
+    result(:visible="endFlag"  @back="back")
+
     modal(:showModal="showModal" @repeat="repeat" @end="end" @closeModal="toggleModal")
+
     .preloader(v-if="pending")
         .preloader__img
 </template>
@@ -17,41 +20,13 @@ import axios from 'axios';
 import masonry from './components/masonry/masonry.vue';
 import modal from './components/modal/modal.vue';
 import result from './components/result/result.vue';
-
-const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-const sec2time = (timeInSeconds) => {
-  const sec_num = parseInt(timeInSeconds, 10);
-  let hours = Math.floor(sec_num / 3600);
-  let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-  let seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-  if (hours < 10) { hours = `0${hours}`; }
-  if (minutes < 10) { minutes = `0${minutes}`; }
-  if (seconds < 10) { seconds = `0${seconds}`; }
-  return `${hours}:${minutes}:${seconds}`;
-};
-
-const setInterval = (f, time) => {
-  setInterval.ids = setInterval.ids || {};
-  setInterval.idCount = setInterval.idCount || 0;
-  const that = this;
-  const id = setInterval.idCount++;
-  const l = arguments.length - 2;
-
-  (function theFn() {
-    const args = [].slice.call(arguments, 0, l);
-    f.apply(this, args);
-    setInterval.ids[id] = setTimeout.apply(this, [theFn, time].concat(args));
-  }).apply(that, [].slice.call(arguments, 2, arguments.length));
-  return id;
-};
+import { randomNum, sec2time, setInterval } from './helpers.js'
 
 export default {
   name: 'app',
   data() {
     return {
-      apiUrl: 'https://apidir.pfdo.ru/v1/directory-program-activities',
+      apiUrl: 'https://json-dummy.herokuapp.com/words',
       word: '',
       id: null,
       showModal: false,
@@ -111,7 +86,7 @@ export default {
         this.word = data.name;
         this.id = data.id;
         this.pending = false;
-        this.$nextTick(() => {
+        this.$nextTick(() => { // запуск таймера
           this.time = 0;
           this.time = setInterval(() => this.time += 1, 1000);
         });
@@ -128,14 +103,14 @@ export default {
         return data;
       }
 
-      const alreadyBeen = () => this.usedData.find(el => el.id === id);
+      const alreadyBeen = () => this.usedData.find(el => el.id === id); //если слово отгадано, запрос на новое
       return alreadyBeen() ? this.getWord() : data;
     },
 
     getWord() {
-      return axios.get(`${this.apiUrl}/${randomNum(2, 1368)}`, {
+      return axios.get(`${this.apiUrl}/${randomNum(1, 71)}`, {
         crossDomain: true,
-      }).then(response => (response.data.result_code === 'LST01' ? this.getWord() : this.chooseWord(response.data.data)))
+      }).then(response => (!response.data.name ? this.getWord() : this.chooseWord(response.data)))
         .catch((error) => {
           alert(error);
         });

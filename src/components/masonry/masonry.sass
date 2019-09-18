@@ -15,18 +15,20 @@
   &__title
     font-size: 27px
     display: block
-    margin-bottom: 30px
+    margin-bottom: 45px
     text-align: center
+  &__word
+    & + .masonry__word
+      margin-top: 20px
   &__list
     display: flex
-    flex-wrap: wrap
     justify-content: center
     margin-top: -20px
     margin-left: -20px
     position: relative
   &__item
-    width: 75px
-    height: 75px
+    width: 65px
+    height: 65px
     box-sizing: border-box
     background: #fff
     border-radius: 3px
@@ -35,7 +37,7 @@
     align-items: center
     justify-content: center
     user-select: none
-    font-size: 35px
+    font-size: 30px
     padding: 10px 0
     overflow: hidden
     text-align: center

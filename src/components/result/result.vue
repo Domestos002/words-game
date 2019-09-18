@@ -1,5 +1,5 @@
 <template lang="pug">
-    .result
+    .result(v-if="visible")
         .result__inner
             p.result__title Статистика попыток
             table.result__table
@@ -14,7 +14,8 @@
                         th
                             a.result__link(@click="toggleSort('timeNum')") Time
                 tbody
-                    tr(v-for='value in data' :key='value.id')
+                    tr(v-for='value in data'
+                        :key='value.id')
                         td {{ value.id }}
                         td {{ value.word }}
                         td {{ value.time }}

@@ -14,13 +14,13 @@ export default ({
   },
 
   methods: {
-    closeModal() {
+    closeModal: function() {
       this.$emit('closeModal');
     },
-    onRepeat() {
+    onRepeat: function() {
       this.$emit('repeat');
     },
-    onEnd() {
+    onEnd: function() {
       this.$emit('end');
     },
   },

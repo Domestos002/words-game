@@ -6,7 +6,6 @@
             .modal__buttons
                 button.btn.btn--primary.modal__btn(@click="onRepeat") Конечно!
                 button.btn.btn--primary.modal__btn(@click="onEnd") Я уже устал
-            span.modal__close(@click="closeModal")
 </template>
 <style src="./modal.sass" lang="sass"></style>
 <script src="./modal.js"></script>
