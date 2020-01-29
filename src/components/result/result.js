@@ -19,9 +19,11 @@ export default ({
     };
   },
 
-  mounted() {
-    this.data = JSON.parse(localStorage.getItem('used_data'));
-    this.toggleSort('id');
+  watch: {
+    visible() {
+      this.data = JSON.parse(localStorage.getItem('used_data'));
+      if(this.data) this.toggleSort('id');
+    }
   },
 
   methods: {

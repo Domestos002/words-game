@@ -80,6 +80,7 @@ export default {
     },
 
     chooseWord({ name, id }) {
+      console.log(name);
       const data = { name: name.toUpperCase().replace(/\s*\(.*?\)\s*/g, ''), id };
       if (!this.usedData) {
         return data;
@@ -90,12 +91,12 @@ export default {
     },
 
     getWord() {
-      return axios.get(`${this.apiUrl}/${randomNum(1, 71)}`, {
+      return axios.get(`${this.apiUrl}/${randomNum(1, 11)}`, {
         crossDomain: true,
-      }).then(response => (!response.data.name ? this.getWord() : this.chooseWord(response.data)))
-        .catch((error) => {
-          alert(error);
-        });
+      }).then(response => this.chooseWord(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
     },
   },
 };
